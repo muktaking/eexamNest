@@ -1,0 +1,5 @@
+server:
+  port: 4000
+jwt:
+  expiresIn: 21600
+  secret: o7D+?wq::jKxyqX<[.j>+B2ij{w2y@S+"CpQ[l2ad0{;hf36+~g$KtEd-Ts>y:~
