@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/rajdocto/nest/
+    - export DEPLOYPATH=/home/rajdocto/nest/dist/
     - /bin/cp -R dist/* $DEPLOYPATH
