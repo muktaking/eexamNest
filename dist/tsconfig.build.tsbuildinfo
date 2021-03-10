@@ -2974,7 +2974,7 @@
         "signature": "924336fb4fa06879809f1248814b0795014f41ba75f0d7d031352fa6d032ae0e"
       },
       "../src/questions/stem.entity.ts": {
-        "version": "d811711fabd55bed11c5e9608efe1b346a2ad51d5ef9272e2bf2a73b34202726",
+        "version": "bbf216fcc7c5acbd5dbe71932e071cbb29a40f084f68fa62883328f941d44c01",
         "signature": "32008c6a16de72316c8a2ba4d75a5c3f40893cbae76c5951db43acab510e78a9"
       },
       "../src/questions/question.entity.ts": {
