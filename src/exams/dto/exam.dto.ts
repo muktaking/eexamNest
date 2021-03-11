@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsEnum,
   IsNotEmpty,
   IsNumberString,
@@ -34,9 +35,9 @@ export class CreateExamDto {
   description: string;
 
   @IsNotEmpty()
-  @IsNumberString({ each: true })
+  @IsArray()
   //@IsMongoId({ each: true })
-  questions: Array<string>;
+  questions: Array<number>;
 
   @IsOptional()
   @IsNotEmpty()

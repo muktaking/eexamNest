@@ -116,6 +116,7 @@ let ExamsService = class ExamsService {
                 "createdAt",
             ],
             relations: ["categoryType"],
+            order: { createdAt: "DESC" },
         }));
         if (err)
             throw new common_1.InternalServerErrorException();

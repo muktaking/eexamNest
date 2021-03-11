@@ -4,7 +4,7 @@ export declare class CreateExamDto {
     type: ExamType;
     categoryType: Array<string>;
     description: string;
-    questions: Array<string>;
+    questions: Array<number>;
     singleQuestionMark: number;
     questionStemLength: number;
     penaltyMark: number;

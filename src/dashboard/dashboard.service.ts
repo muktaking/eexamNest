@@ -46,11 +46,23 @@ export class DashboardService {
   async getFeaturedExams() {
     const [err, exams] = await to(
       this.examRepository.find({
-        where: {
-          categoryIds: Like(
-            "%," + (await this.featuredCategoryId).toString() + ",%"
-          ),
-        },
+        where: [
+          {
+            categoryIds: Like(
+              "%," + (await this.featuredCategoryId).toString() + ",%"
+            ),
+          },
+          {
+            categoryIds: Like(
+              (await this.featuredCategoryId).toString() + ",%"
+            ),
+          },
+          {
+            categoryIds: Like(
+              "%," + (await this.featuredCategoryId).toString()
+            ),
+          },
+        ],
         relations: ["categoryType"],
         order: { id: "DESC" },
         take: 5,

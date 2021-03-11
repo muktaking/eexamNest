@@ -137,7 +137,7 @@ export class ExamsService {
           //"categoryType",
         ],
         relations: ["categoryType"],
-        //order: { id: "DESC" },
+        order: { createdAt: "DESC" },
       })
     );
     if (err) throw new InternalServerErrorException();

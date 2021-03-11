@@ -44,9 +44,17 @@ let DashboardService = class DashboardService {
     }
     async getFeaturedExams() {
         const [err, exams] = await utils_1.to(this.examRepository.find({
-            where: {
-                categoryIds: typeorm_2.Like("%," + (await this.featuredCategoryId).toString() + ",%"),
-            },
+            where: [
+                {
+                    categoryIds: typeorm_2.Like("%," + (await this.featuredCategoryId).toString() + ",%"),
+                },
+                {
+                    categoryIds: typeorm_2.Like((await this.featuredCategoryId).toString() + ",%"),
+                },
+                {
+                    categoryIds: typeorm_2.Like("%," + (await this.featuredCategoryId).toString()),
+                },
+            ],
             relations: ["categoryType"],
             order: { id: "DESC" },
             take: 5,

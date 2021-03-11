@@ -21,7 +21,7 @@ export declare class Exam extends BaseEntity {
     categoryIds: string[];
     categoryType: any;
     description: string;
-    questions: string[];
+    questions: number[];
     singleQuestionMark: number;
     questionStemLength: number;
     singleStemMark: number;

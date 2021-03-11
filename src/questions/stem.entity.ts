@@ -18,7 +18,7 @@ export class Stem extends BaseEntity {
   @Column({ type: "varchar", length: 1, nullable: false })
   aStem: string;
 
-  @Column({ type: "varchar", length: 200, nullable: true, default: null })
+  @Column({ type: "varchar", length: 200, nullable: true })
   fbStem?: string;
 
   @ManyToOne(

@@ -43,7 +43,7 @@ __decorate([
 ], CreateExamDto.prototype, "description", void 0);
 __decorate([
     class_validator_1.IsNotEmpty(),
-    class_validator_1.IsNumberString({ each: true }),
+    class_validator_1.IsArray(),
     __metadata("design:type", Array)
 ], CreateExamDto.prototype, "questions", void 0);
 __decorate([

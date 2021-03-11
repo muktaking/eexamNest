@@ -61,7 +61,7 @@ export class Exam extends BaseEntity {
   description: string;
 
   @Column({ type: "simple-array" })
-  questions: string[];
+  questions: number[];
 
   @Column({ default: 1 })
   singleQuestionMark: number;
