@@ -14,7 +14,9 @@ import {
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { FileInterceptor } from "@nestjs/platform-express";
+import * as fs from "fs";
 import { diskStorage } from "multer";
+import * as sharp from "sharp";
 import { Role } from "../roles.decorator";
 import { RolesGuard } from "../roles.guard";
 import { RolePermitted } from "../users/user.entity";
@@ -62,10 +64,23 @@ export class CategoriesController {
     if (!image) {
       throw new Error("Image is not Selected");
     }
-    return await this.categoriesService.createCategory(
-      createCategoryDto,
-      image
-    );
+
+    const resizeImage = await sharp(image.path)
+      .resize(350, 180)
+      .png()
+      .toBuffer();
+
+    console.log(image);
+
+    const resizeImageName = image.filename.split(".")[0] + "_350_180.png";
+
+    const resizeImagePathName = "./uploads/images/" + resizeImageName;
+
+    fs.writeFileSync(resizeImagePathName, resizeImage);
+
+    return await this.categoriesService.createCategory(createCategoryDto, {
+      filename: resizeImageName,
+    });
   }
 
   @Patch()

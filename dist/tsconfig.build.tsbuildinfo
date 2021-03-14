@@ -2954,11 +2954,11 @@
         "signature": "9bded887d251f59ca04c7b762a7a9970c3fe5513d25490c61854366f6d540206"
       },
       "../src/categories/categories.service.ts": {
-        "version": "38c154d77377883f67b8cfc8428a189d2f856e66697e05ebf2f352f4485c164c",
+        "version": "ac7650e3715d1caea21c03f09445fda6426e50cf8716119e6fa9e1792158505d",
         "signature": "a523cda87afbdf0604caa63652a7c9b0b1dacc509f38c57cae3528b17506cc81"
       },
       "../src/categories/categories.controller.ts": {
-        "version": "ff39b9951cbf6be693bb5f49824d3430c7a3fcb46b450c3fb4d53040eb3ee850",
+        "version": "a1c39db69c9556ecd563689b361a7a9bbd4cc1aa1942991182b9b99a68f734df",
         "signature": "b7ac56f6eabb3251825cab09ed21c59dfe97e8e6430bb43d62be2f2af5a0a86a"
       },
       "../src/categories/categories.module.ts": {
@@ -3038,20 +3038,20 @@
         "signature": "bb56655607f881ec5ac92df90a7d795ac0efc18c4b9d97df1837136cf1e3e968"
       },
       "../src/postexams/postexam.model.ts": {
-        "version": "40b1fde50045a79a27b34074021aad40ef3a25d9da9c5c1356d4af022a340031",
-        "signature": "8af0c50f521a464134d3ba340b110efb5e70eed2d73a0babc749d6fa5462cfae"
+        "version": "9a2c19f503b6c80d6286a2e3d032f3918ec21f36c268d22412e97028951a2b87",
+        "signature": "adb97d982d99c3dc5edaf9b57d0fc7663b9de1afb2e9b035e4344b82af0acc73"
       },
       "../src/postexams/pipe/answer-validation.pipe.ts": {
         "version": "fa9ffe42f28b85320ccd6718e81d44e957d92291366da0cb0327c93915b7948e",
         "signature": "a908103c2809287586624b71d6114b10dd31d4cfe68b246ad3e69980bc319ead"
       },
       "../src/postexams/postexams.service.ts": {
-        "version": "9e28309c361bf67778cfaae5d1a9a544b27ada7b7cec203e46a1a33ec7a3af6b",
-        "signature": "96cea8a74372d80599db685864ebb2a39fc3d2e103b0cbac1e9a0f769fc99441"
+        "version": "e1fc36fef4e06ef2de75be2604445001892a0e348d8992b3defa0c9a644b08c6",
+        "signature": "0b5a23608d2cbe0bb800e029373d4e9f72ac7ae768971470a536eaf266751ebf"
       },
       "../src/postexams/postexams.controller.ts": {
         "version": "1d98e976297595931ec912bc7393ae5d507b2f11a46684064dcca957e985ad16",
-        "signature": "00e2635e55ec2822937c246832a1d6276913e54b976ef0b3391e5434f1c2c7df"
+        "signature": "ebc21609c50f4be9cb10df65647602a2dcee2898c1187d290c8a436052a4fa9d"
       },
       "../src/postexams/postexams.module.ts": {
         "version": "ecb7c0ae3e05379e343332fe87f09fccdb07cb6dcbffe02810e78c12c8f40ccf",
@@ -3078,7 +3078,7 @@
         "signature": "98491e360afa4651f4912c4a672e51b445498f5d57fdd9d495a748dd411cdea2"
       },
       "../src/questions/questions.service.ts": {
-        "version": "614b6d6a00f6052fca37664562fd81aa3d0b35d1b82566a3335356360dc35321",
+        "version": "152904b67d7133217584c24c9afbe33d242d0124c934cfe02f6051e7e0f8e95f",
         "signature": "db5165631a637b3225f8bd65b6df2c4de52de951d386739ffc76ffb00ef23121"
       },
       "../src/questions/questions.controller.ts": {
@@ -9393,13 +9393,13 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
         "../node_modules/@nestjs/platform-express/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
         "../src/roles.decorator.ts",
         "../src/roles.guard.ts",
         "../src/users/user.entity.ts",
         "../src/utils/file-uploading.utils.ts",
         "../src/categories/categories.service.ts",
         "../src/categories/dto/category.dto.ts",
-        "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"

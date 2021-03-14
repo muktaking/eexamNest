@@ -97,7 +97,7 @@ let PostexamsService = class PostexamsService {
                 id: question.id,
                 qText: question.qText,
                 stems: question.stems,
-                generalFeedbacks: question.generalFeedbacks,
+                generalFeedback: question.generalFeedback,
                 result: { mark: 0 },
             };
             if (question.qType === question_model_1.QType.Matrix) {
@@ -120,7 +120,7 @@ let PostexamsService = class PostexamsService {
                 id: question.id,
                 qText: question.qText,
                 stems: question.stems,
-                generalFeedbacks: question.generalFeedbacks,
+                generalFeedback: question.generalFeedback,
                 result: { mark: 0 },
             };
             if (question.qType === question_model_1.QType.Matrix) {
@@ -138,6 +138,7 @@ let PostexamsService = class PostexamsService {
             resultArray,
             totalMark: this.totalMark,
             totalScore: this.totalScore,
+            totalPenaltyMark: this.totalPenaltyMark,
             totalScorePercentage,
             timeTakenToComplete,
         };
@@ -166,7 +167,7 @@ let PostexamsService = class PostexamsService {
                 id: question.id,
                 qText: question.qText,
                 stems: question.stems,
-                generalFeedbacks: question.generalFeedbacks,
+                generalFeedback: question.generalFeedback,
                 result: { mark: 0 },
             };
             if (question.qType === question_model_1.QType.Matrix) {

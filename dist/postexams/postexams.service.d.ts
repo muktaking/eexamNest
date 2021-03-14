@@ -22,6 +22,7 @@ export declare class PostexamsService {
         resultArray: Particulars[];
         totalMark: number;
         totalScore: number;
+        totalPenaltyMark: number;
         totalScorePercentage: number;
         timeTakenToComplete: string;
     }>;

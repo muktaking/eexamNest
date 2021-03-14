@@ -76,6 +76,7 @@ export class CategoriesService {
       let result = await category.save();
       return result;
     } catch (error) {
+      console.log(error);
       deleteImageFile(imageUrl);
       if (error.code == 11000) {
         throw new ConflictException(`This category is already exist.`);

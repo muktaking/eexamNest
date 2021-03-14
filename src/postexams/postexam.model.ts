@@ -4,7 +4,7 @@ export interface Particulars {
   id: string;
   qText: string;
   stems: Stem;
-  generalFeedbacks: string;
+  generalFeedback: string;
   result: Result;
 }
 

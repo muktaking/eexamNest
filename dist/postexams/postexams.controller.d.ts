@@ -8,6 +8,7 @@ export declare class PostexamsController {
         resultArray: import("./postexam.model").Particulars[];
         totalMark: number;
         totalScore: number;
+        totalPenaltyMark: number;
         totalScorePercentage: number;
         timeTakenToComplete: string;
     }>;

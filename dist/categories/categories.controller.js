@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const platform_express_1 = require("@nestjs/platform-express");
+const fs = require("fs");
 const multer_1 = require("multer");
+const sharp = require("sharp");
 const roles_decorator_1 = require("../roles.decorator");
 const roles_guard_1 = require("../roles.guard");
 const user_entity_1 = require("../users/user.entity");
@@ -36,7 +38,17 @@ let CategoriesController = class CategoriesController {
         if (!image) {
             throw new Error("Image is not Selected");
         }
-        return await this.categoriesService.createCategory(createCategoryDto, image);
+        const resizeImage = await sharp(image.path)
+            .resize(350, 180)
+            .png()
+            .toBuffer();
+        console.log(image);
+        const resizeImageName = image.filename.split(".")[0] + "_350_180.png";
+        const resizeImagePathName = "./uploads/images/" + resizeImageName;
+        fs.writeFileSync(resizeImagePathName, resizeImage);
+        return await this.categoriesService.createCategory(createCategoryDto, {
+            filename: resizeImageName,
+        });
     }
     async updateCategory(id, createCategoryDto, image) {
         return await this.categoriesService.updateCategory(id, createCategoryDto, image);

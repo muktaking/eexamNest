@@ -239,7 +239,7 @@ export class QuestionsService {
         qType: element[1],
         qText: element[2],
         stems: stems,
-        generalFeedbacks: element[18],
+        generalFeedback: element[18],
         tags: _.words(element[19]).toString(),
       });
     });

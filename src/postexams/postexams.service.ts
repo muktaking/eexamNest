@@ -1,7 +1,7 @@
 import {
   Injectable,
   InternalServerErrorException,
-  Scope,
+  Scope
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as _ from "lodash";
@@ -146,7 +146,7 @@ export class PostexamsService {
         id: question.id,
         qText: question.qText,
         stems: question.stems,
-        generalFeedbacks: question.generalFeedbacks,
+        generalFeedback: question.generalFeedback,
         result: { mark: 0 },
       };
 
@@ -181,7 +181,7 @@ export class PostexamsService {
         id: question.id,
         qText: question.qText,
         stems: question.stems,
-        generalFeedbacks: question.generalFeedbacks,
+        generalFeedback: question.generalFeedback,
         result: { mark: 0 },
       };
 
@@ -200,6 +200,7 @@ export class PostexamsService {
       resultArray,
       totalMark: this.totalMark,
       totalScore: this.totalScore,
+      totalPenaltyMark: this.totalPenaltyMark,
       totalScorePercentage,
       timeTakenToComplete,
     };
@@ -251,7 +252,7 @@ export class PostexamsService {
         id: question.id,
         qText: question.qText,
         stems: question.stems,
-        generalFeedbacks: question.generalFeedbacks,
+        generalFeedback: question.generalFeedback,
         result: { mark: 0 },
       };
       if (question.qType === QType.Matrix) {

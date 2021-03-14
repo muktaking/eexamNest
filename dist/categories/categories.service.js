@@ -71,6 +71,7 @@ let CategoriesService = class CategoriesService {
             return result;
         }
         catch (error) {
+            console.log(error);
             utils_1.deleteImageFile(imageUrl);
             if (error.code == 11000) {
                 throw new common_1.ConflictException(`This category is already exist.`);
