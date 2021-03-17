@@ -53,7 +53,7 @@ let UsersService = class UsersService {
             const user = await this.userRepository.findOne({ email }, { select: ["id", "firstName", "lastName"] });
             return { name: user.firstName + " " + user.lastName, id: user.id };
         }
-        const user = await this.userRepository.findOne({ email: email });
+        const user = await this.userRepository.findOne({ email: email }, { select: ["id", "firstName", "lastName", "role", "email", "createdAt"] });
         return user;
     }
     async findAllStudentNumber() {

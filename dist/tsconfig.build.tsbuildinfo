@@ -2718,12 +2718,12 @@
         "signature": "2d7f7a683f097f249e7dc208ebc0a8193339afe1e76ed041d613280183e3c04a"
       },
       "../src/users/users.service.ts": {
-        "version": "b9facc676600a5cb2396faa507cc2087b1355ed0a87d3f839cb396754279a98f",
+        "version": "b50c3d31bda4e920dac7aca3522c3ec0f96e8b4740b5e12bd5b4e3023a59cb64",
         "signature": "54a25864332e5a97c29b2216e68b836195e1bfa4324e348c53a77e482b945109"
       },
       "../src/users/users.controller.ts": {
-        "version": "f02764da1044eedd23289a9c85f033f8c00506c2f46db31250c8d1cd3bddf4bf",
-        "signature": "70f89ff605518ccfc6c753cb0075103580f10109821b965e5b11a8fca7cc38d6"
+        "version": "0466503b5737e40fe9f42fb4903c0989c35751f624d670752ccbbfd4ebcaee16",
+        "signature": "f7ea9b192c9a0bb05fb813c7d6b23f5731b416b89780fcecd8559d05635746b7"
       },
       "../src/users/users.module.ts": {
         "version": "989da71e322a37414dee21cc36a0c6858b04d643a0f861578ce7a383ecbc3fba",
@@ -8873,6 +8873,7 @@
       ],
       "../src/users/users.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/passport/index.d.ts",
         "../src/users/users.service.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
