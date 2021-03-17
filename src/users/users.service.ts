@@ -58,23 +58,42 @@ export class UsersService {
     isForAuth: boolean = false
   ): Promise<User | any> {
     if (nameOnly) {
-      const user = await this.userRepository.findOne(
-        { email },
-        { select: ["id", "firstName", "lastName"] }
+      const [err, user] = await to(
+        this.userRepository.findOne(
+          { email },
+          { select: ["id", "firstName", "lastName"] }
+        )
       );
+      if (err) throw new InternalServerErrorException();
       return { name: user.firstName + " " + user.lastName, id: user.id };
     }
     if (isForAuth) {
-      const user = await this.userRepository.findOne(
-        { email: email },
-        { select: ["id", "email", "password", "role"] }
+      const [err, user] = to(
+        await this.userRepository.findOne(
+          { email: email },
+          { select: ["id", "email", "password", "role"] }
+        )
       );
+      if (err) throw new InternalServerErrorException();
       return user;
     }
-    const user = await this.userRepository.findOne(
-      { email: email },
-      { select: ["id", "firstName", "lastName", "role", "email", "createdAt"] }
+    const [err, user] = await to(
+      this.userRepository.findOne(
+        { email: email },
+        {
+          select: [
+            "id",
+            "firstName",
+            "userName",
+            "lastName",
+            "role",
+            "email",
+            "createdAt",
+          ],
+        }
+      )
     );
+    if (err) throw new InternalServerErrorException();
     return user;
   }
 

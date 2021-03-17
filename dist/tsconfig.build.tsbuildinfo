@@ -2718,7 +2718,7 @@
         "signature": "2d7f7a683f097f249e7dc208ebc0a8193339afe1e76ed041d613280183e3c04a"
       },
       "../src/users/users.service.ts": {
-        "version": "65d46ead595cb648f3be27c0c578e628d0c9e6db8c9784df6ecded952e15a226",
+        "version": "0e41f199b4b5f36f323b381704ffc11c7635c780872fa629859229f231d4d626",
         "signature": "16197c92e319a35cbd67b8f989567346cf2e79de0846b204aae4b123be6de7c6"
       },
       "../src/users/users.controller.ts": {
