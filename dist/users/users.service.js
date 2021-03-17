@@ -48,10 +48,14 @@ let UsersService = class UsersService {
     async findAllUsers() {
         return await this.userRepository.find({});
     }
-    async findOneUser(email, nameOnly = false) {
+    async findOneUser(email, nameOnly = false, isForAuth = false) {
         if (nameOnly) {
             const user = await this.userRepository.findOne({ email }, { select: ["id", "firstName", "lastName"] });
             return { name: user.firstName + " " + user.lastName, id: user.id };
+        }
+        if (isForAuth) {
+            const user = await this.userRepository.findOne({ email: email }, { select: ["id", "email", "password", "role"] });
+            return user;
         }
         const user = await this.userRepository.findOne({ email: email }, { select: ["id", "firstName", "lastName", "role", "email", "createdAt"] });
         return user;

@@ -54,7 +54,8 @@ export class UsersService {
 
   async findOneUser(
     email: string,
-    nameOnly: boolean = false
+    nameOnly: boolean = false,
+    isForAuth: boolean = false
   ): Promise<User | any> {
     if (nameOnly) {
       const user = await this.userRepository.findOne(
@@ -62,6 +63,13 @@ export class UsersService {
         { select: ["id", "firstName", "lastName"] }
       );
       return { name: user.firstName + " " + user.lastName, id: user.id };
+    }
+    if (isForAuth) {
+      const user = await this.userRepository.findOne(
+        { email: email },
+        { select: ["id", "email", "password", "role"] }
+      );
+      return user;
     }
     const user = await this.userRepository.findOne(
       { email: email },

@@ -22,7 +22,7 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async validateUser(email, password) {
-        let user = await this.usersService.findOneUser(email);
+        let user = await this.usersService.findOneUser(email, false, true);
         if (user) {
             const isValid = await bcrypt.compare(password, user.password);
             user = isValid ? _.pick(user, ["email", "role", "id"]) : null;
