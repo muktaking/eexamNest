@@ -5,14 +5,14 @@ const validator = require("validator");
 class StemValidationPipe {
     transform(stem) {
         const errorMessage = [];
-        let qStem, aStem, fdStem;
+        let qStem, aStem, fbStem;
         try {
             stem = stem.filter((v, i) => {
                 let error = [];
                 let msg;
                 qStem = v.qStem.trim();
                 aStem = v.aStem.trim();
-                fdStem = v.fdStem ? v.fdStem.trim() : null;
+                fbStem = v.fbStem ? v.fbStem.trim() : null;
                 msg = validator.isLength(qStem, { min: 1, max: 200 })
                     ? null
                     : `Question of stem_${i} is empty or more than 200`;
@@ -23,8 +23,8 @@ class StemValidationPipe {
                     : `Answer of stem_${i} is empty or more than 200`;
                 if (msg)
                     error.push(msg);
-                if (fdStem) {
-                    msg = validator.isLength(fdStem, { min: 1, max: 200 })
+                if (fbStem) {
+                    msg = validator.isLength(fbStem, { min: 1, max: 200 })
                         ? null
                         : `feedback of stem_${i} more than 200`;
                     if (msg)

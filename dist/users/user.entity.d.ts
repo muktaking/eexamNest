@@ -16,6 +16,7 @@ export declare class User extends BaseEntity {
     firstName: string;
     lastName: string;
     userName: string;
+    avatar: string;
     password: string;
     email: string;
     gender: Gender;

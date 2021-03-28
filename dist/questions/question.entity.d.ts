@@ -14,7 +14,7 @@ export declare class Question extends BaseEntity {
     generalFeedback: string;
     tags: string;
     createDate: Timestamp;
-    modifiedDate: Timestamp;
+    modifiedDate: Timestamp | string;
     creatorId: number;
     modifiedById: number;
 }

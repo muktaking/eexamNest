@@ -44,6 +44,15 @@ let ExamsController = class ExamsController {
     async findFreeQuestionsByExamId(id) {
         return await this.examService.findFreeQuestionsByExamId(id);
     }
+    async updateExamById(examId, createExamDto) {
+        return await this.examService.updateExamById(examId.id, createExamDto);
+    }
+    async deleteQuestionById(examId) {
+        return await this.examService.deleteExam(examId.id);
+    }
+    async deleteQuestion(examIds) {
+        return await this.examService.deleteExam(...examIds.ids);
+    }
 };
 __decorate([
     common_1.Post(),
@@ -100,6 +109,29 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ExamsController.prototype, "findFreeQuestionsByExamId", null);
+__decorate([
+    common_1.Patch(":id"),
+    __param(0, common_1.Param()), __param(1, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, exam_dto_1.CreateExamDto]),
+    __metadata("design:returntype", Promise)
+], ExamsController.prototype, "updateExamById", null);
+__decorate([
+    common_1.Delete(":id"),
+    roles_decorator_1.Role(user_entity_1.RolePermitted.coordinator),
+    __param(0, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ExamsController.prototype, "deleteQuestionById", null);
+__decorate([
+    common_1.Delete(),
+    roles_decorator_1.Role(user_entity_1.RolePermitted.coordinator),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ExamsController.prototype, "deleteQuestion", null);
 ExamsController = __decorate([
     common_1.Controller("exams"),
     __metadata("design:paramtypes", [exams_service_1.ExamsService])

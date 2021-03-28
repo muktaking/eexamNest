@@ -55,7 +55,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Exam.prototype, "categoryIds", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => category_entity_1.Category),
+    typeorm_1.ManyToMany(() => category_entity_1.Category, { onUpdate: "CASCADE", onDelete: "CASCADE" }),
     typeorm_1.JoinTable(),
     __metadata("design:type", Object)
 ], Exam.prototype, "categoryType", void 0);
@@ -89,7 +89,7 @@ __decorate([
 ], Exam.prototype, "timeLimit", void 0);
 __decorate([
     typeorm_1.Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
-    __metadata("design:type", typeorm_1.Timestamp)
+    __metadata("design:type", Object)
 ], Exam.prototype, "createdAt", void 0);
 __decorate([
     typeorm_1.Column(),

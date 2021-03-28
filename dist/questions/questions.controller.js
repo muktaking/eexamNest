@@ -30,6 +30,9 @@ let QuestionsController = class QuestionsController {
     async getAllQuestions() {
         return await this.questionService.findAllQuestions();
     }
+    async getQuestionById(id) {
+        return await this.questionService.findQuestionById(id.id);
+    }
     async getQuestionsByCategory(categoryId) {
         return await this.questionService.findQuestionByFilter("categoryId", categoryId.id);
     }
@@ -38,6 +41,15 @@ let QuestionsController = class QuestionsController {
     }
     async createQuestionByUpload(req, category, file) {
         return await this.questionService.createQuestionByUpload(req.user.id, category, file);
+    }
+    async updateQuestionById(questionId, createQuestionDto, stem, req) {
+        return await this.questionService.updateQuestionById(questionId.id, createQuestionDto, stem, req.user.id);
+    }
+    async deleteQuestionById(questionId) {
+        return await this.questionService.deleteQuestion(questionId.id);
+    }
+    async deleteQuestion(questionIds) {
+        return await this.questionService.deleteQuestion(...questionIds.ids);
     }
 };
 __decorate([
@@ -48,6 +60,15 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionsController.prototype, "getAllQuestions", null);
+__decorate([
+    common_1.Get(":id"),
+    common_1.UseGuards(passport_1.AuthGuard("jwt")),
+    roles_decorator_1.Role(user_model_1.RolePermitted.mentor),
+    __param(0, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], QuestionsController.prototype, "getQuestionById", null);
 __decorate([
     roles_decorator_1.Role(user_model_1.RolePermitted.moderator),
     common_1.Get("/category/:id"),
@@ -85,6 +106,33 @@ __decorate([
     __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", Promise)
 ], QuestionsController.prototype, "createQuestionByUpload", null);
+__decorate([
+    common_1.Patch("/:id"),
+    roles_decorator_1.Role(user_model_1.RolePermitted.mentor),
+    __param(0, common_1.Param()),
+    __param(1, common_1.Body()),
+    __param(2, common_1.Body("stem", stem_validation_pipe_1.StemValidationPipe)),
+    __param(3, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, create_question_dto_1.CreateQuestionDto, Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuestionsController.prototype, "updateQuestionById", null);
+__decorate([
+    common_1.Delete("/:id"),
+    roles_decorator_1.Role(user_model_1.RolePermitted.moderator),
+    __param(0, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], QuestionsController.prototype, "deleteQuestionById", null);
+__decorate([
+    common_1.Delete(),
+    roles_decorator_1.Role(user_model_1.RolePermitted.coordinator),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], QuestionsController.prototype, "deleteQuestion", null);
 QuestionsController = __decorate([
     common_1.UseGuards(passport_1.AuthGuard("jwt"), roles_guard_1.RolesGuard),
     common_1.Controller("questions"),

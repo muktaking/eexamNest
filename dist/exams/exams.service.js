@@ -24,6 +24,7 @@ const typeorm_2 = require("typeorm");
 const exam_entity_1 = require("./exam.entity");
 const exam_repository_1 = require("./exam.repository");
 const profie_repository_1 = require("./profie.repository");
+const moment = require("moment");
 let ExamsService = class ExamsService {
     constructor(usersService, questionRepository, categoryRepository, examRepository, examProfileRepository) {
         this.usersService = usersService;
@@ -301,6 +302,36 @@ let ExamsService = class ExamsService {
             throw new common_1.InternalServerErrorException();
         }
         return result;
+    }
+    async updateExamById(id, createExamDto) {
+        const { title, type, categoryType, description, questions, singleQuestionMark, questionStemLength, penaltyMark, timeLimit, } = createExamDto;
+        const exam = await this.examRepository.findOne(+id).catch((e) => {
+            console.log(e);
+            throw new common_1.HttpException("Could not able to fetch oldQuestion from database ", common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        });
+        exam.title = title;
+        exam.type = type;
+        exam.categoryIds = categoryType;
+        exam.description = description;
+        exam.questions = questions;
+        exam.singleQuestionMark = singleQuestionMark;
+        exam.questionStemLength = questionStemLength;
+        (exam.penaltyMark = penaltyMark), (exam.timeLimit = timeLimit);
+        exam.categoryIds = categoryType;
+        exam.categoryType = [];
+        exam.createdAt = moment().format("YYYY-MM-DD HH=mm=sss");
+        categoryType.forEach((e) => {
+            exam.categoryType.push({ id: +e });
+        });
+        const [err, result] = await utils_1.to(exam.save());
+        if (err) {
+            console.log(err);
+            throw new common_1.InternalServerErrorException();
+        }
+        return result;
+    }
+    async deleteExam(...args) {
+        return await this.examRepository.delete(args);
     }
 };
 ExamsService = __decorate([

@@ -22,6 +22,9 @@ let UsersController = class UsersController {
     async getUserById(req) {
         return await this.userService.findOneUser(req.user.email);
     }
+    async changeAvatar(req, name) {
+        return await this.userService.changeAvatar(req.user.id, name);
+    }
     async getAlltUsers() {
         return await this.userService.findAllUsers();
     }
@@ -34,6 +37,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getUserById", null);
+__decorate([
+    common_1.Post("/avatar/:name"),
+    common_1.UseGuards(passport_1.AuthGuard("jwt")),
+    __param(0, common_1.Req()), __param(1, common_1.Param("name")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "changeAvatar", null);
 __decorate([
     common_1.Get("all"),
     __metadata("design:type", Function),

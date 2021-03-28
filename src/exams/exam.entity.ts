@@ -47,13 +47,7 @@ export class Exam extends BaseEntity {
   @Column({ type: "simple-array" })
   categoryIds: string[];
 
-  // @OneToMany(
-  //   () => Category,
-  //   (category) => category.exam
-  // )
-  // @JoinColumn({ name: "categoryType" })
-
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Category, { onUpdate: "CASCADE", onDelete: "CASCADE" })
   @JoinTable()
   categoryType: any;
 
@@ -79,7 +73,7 @@ export class Exam extends BaseEntity {
   timeLimit: number;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  createdAt: Timestamp;
+  createdAt: Timestamp | string;
 
   @Column()
   creatorId: number;

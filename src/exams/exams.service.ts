@@ -1,6 +1,8 @@
 const shuffle = require("knuth-shuffle").knuthShuffle;
 
 import {
+  HttpException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
@@ -17,6 +19,7 @@ import { Exam, ExamType } from "./exam.entity";
 import { ExamRepository } from "./exam.repository";
 import { ExamProfileRepository } from "./profie.repository";
 import { Profile } from "./profile.entity";
+import moment = require("moment");
 
 @Injectable()
 export class ExamsService {
@@ -153,35 +156,6 @@ export class ExamsService {
     };
     return exams;
   }
-
-  // async findAllFreeExams() {
-  //   let [err, exams] = await to(
-  //     this.ExamModel.find(
-  //       { categoryType: await this.freeCategoryId },
-  //       {
-  //         _id: 1,
-  //         title: 1,
-  //         type: 1,
-  //         description: 1,
-  //         createdAt: 1,
-  //         categoryType: 1,
-  //       }
-  //     )
-  //       .populate("categoryType")
-  //       .sort({ _id: -1 })
-  //   );
-  //   if (err) throw new InternalServerErrorException();
-  //   exams = {
-  //     assignment: _.filter(exams, (e) => e.type === ExamType.Assignment),
-  //     weekly: _.filter(exams, (e) => e.type === ExamType.Weekly),
-  //     monthly: _.filter(exams, (e) => e.type === ExamType.Monthly),
-  //     assesment: _.filter(exams, (e) => e.type === ExamType.Assesment),
-  //     term: _.filter(exams, (e) => e.type === ExamType.Term),
-  //     test: _.filter(exams, (e) => e.type === ExamType.Test),
-  //     final: _.filter(exams, (e) => e.type === ExamType.Final),
-  //   };
-  //   return exams;
-  // }
 
   async findLatestExam() {
     const [err, [examLatest]] = await to(
@@ -416,5 +390,55 @@ export class ExamsService {
       throw new InternalServerErrorException();
     }
     return result;
+  }
+
+  async updateExamById(id: string, createExamDto: CreateExamDto) {
+    const {
+      title,
+      type,
+      categoryType,
+      description,
+      questions,
+      singleQuestionMark,
+      questionStemLength,
+      penaltyMark,
+      timeLimit,
+    } = createExamDto;
+
+    const exam = await this.examRepository.findOne(+id).catch((e) => {
+      console.log(e);
+      throw new HttpException(
+        "Could not able to fetch oldQuestion from database ",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    });
+
+    exam.title = title;
+    exam.type = type;
+    exam.categoryIds = categoryType;
+    exam.description = description;
+    exam.questions = questions;
+    exam.singleQuestionMark = singleQuestionMark;
+    exam.questionStemLength = questionStemLength;
+    (exam.penaltyMark = penaltyMark), (exam.timeLimit = timeLimit);
+    //exam.creatorId = +creator;
+    exam.categoryIds = categoryType;
+    exam.categoryType = [];
+    exam.createdAt = moment().format("YYYY-MM-DD HH=mm=sss");
+
+    categoryType.forEach((e) => {
+      exam.categoryType.push({ id: +e });
+    });
+
+    const [err, result] = await to(exam.save());
+    if (err) {
+      console.log(err);
+      throw new InternalServerErrorException();
+    }
+    return result;
+  }
+
+  async deleteExam(...args) {
+    return await this.examRepository.delete(args);
   }
 }

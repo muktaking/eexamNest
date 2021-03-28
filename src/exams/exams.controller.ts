@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -91,5 +93,22 @@ export class ExamsController {
   @Get("free/questions/:id")
   async findFreeQuestionsByExamId(@Param("id") id) {
     return await this.examService.findFreeQuestionsByExamId(id);
+  }
+
+  @Patch(":id")
+  async updateExamById(@Param() examId, @Body() createExamDto: CreateExamDto) {
+    return await this.examService.updateExamById(examId.id, createExamDto);
+  }
+
+  @Delete(":id")
+  @Role(RolePermitted.coordinator)
+  async deleteQuestionById(@Param() examId) {
+    return await this.examService.deleteExam(examId.id);
+  }
+
+  @Delete()
+  @Role(RolePermitted.coordinator)
+  async deleteQuestion(@Body() examIds) {
+    return await this.examService.deleteExam(...examIds.ids);
   }
 }

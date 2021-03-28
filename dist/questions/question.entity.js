@@ -57,7 +57,7 @@ __decorate([
 ], Question.prototype, "createDate", void 0);
 __decorate([
     typeorm_1.Column({ type: "timestamp" }),
-    __metadata("design:type", typeorm_1.Timestamp)
+    __metadata("design:type", Object)
 ], Question.prototype, "modifiedDate", void 0);
 __decorate([
     typeorm_1.Column(),

@@ -21,6 +21,7 @@ const XLSX = require("xlsx");
 const question_entity_1 = require("./question.entity");
 const question_repository_1 = require("./question.repository");
 const stem_entity_1 = require("./stem.entity");
+const moment = require("moment");
 let QuestionsService = class QuestionsService {
     constructor(questionRepository) {
         this.questionRepository = questionRepository;
@@ -31,6 +32,13 @@ let QuestionsService = class QuestionsService {
         if (err)
             throw new common_1.InternalServerErrorException();
         return questions;
+    }
+    async findQuestionById(id) {
+        const [err, question] = await utils_1.to(this.questionRepository.findOne(+id));
+        console.log(err);
+        if (err)
+            throw new common_1.InternalServerErrorException();
+        return question;
     }
     async findQuestionByFilter(filterName, filterValue) {
         const [err, result] = await utils_1.to(this.questionRepository.find({ where: { [filterName]: +filterValue } }));
@@ -97,8 +105,8 @@ let QuestionsService = class QuestionsService {
             throw new common_1.InternalServerErrorException();
         }
     }
-    async updateQuestionById(createQuestionDto, stem, creator) {
-        const { id, title, category, qType, qText, generalFeedback, tags, } = createQuestionDto;
+    async updateQuestionById(id, createQuestionDto, stem, modifiedBy) {
+        const { title, category, qType, qText, generalFeedback, tags, } = createQuestionDto;
         const stems = [];
         stem.stem.forEach((element) => {
             const stem = new stem_entity_1.Stem();
@@ -107,20 +115,28 @@ let QuestionsService = class QuestionsService {
             stem.fbStem = element.fbStem;
             stems.push(stem);
         });
-        let [error, updatedQuestion] = await utils_1.to(this.questionRepository.update(id, {
-            title,
-            categoryId: +category,
-            qType,
-            qText,
-            stems: stems,
-            generalFeedback,
-            tags: tags ? tags.join(",") : null,
-            modifiedDate: Date.now(),
-            modifiedById: +creator,
-        }));
-        if (error)
-            throw new common_1.InternalServerErrorException();
-        return updatedQuestion;
+        const oldQuestion = await this.questionRepository
+            .findOne(+id)
+            .catch((e) => {
+            console.log(e);
+            throw new common_1.HttpException("Could not able to fetch oldQuestion from database ", common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        });
+        const newQuestion = Object.assign({}, oldQuestion);
+        newQuestion.title = title;
+        newQuestion.categoryId = +category;
+        newQuestion.qType = qType;
+        newQuestion.qText = qText;
+        newQuestion.generalFeedback = generalFeedback ? generalFeedback : null;
+        newQuestion.tags = tags ? tags.join(",") : null;
+        newQuestion.modifiedDate = moment().format("YYYY-MM-DD HH=mm=sss");
+        newQuestion.modifiedById = +modifiedBy;
+        newQuestion.stems = stems;
+        await this.questionRepository.delete(+id);
+        return await this.questionRepository.save(newQuestion);
+    }
+    async deleteQuestion(...args) {
+        const res = await this.questionRepository.delete(args);
+        return { message: "Question deleted successfully" };
     }
     toCollection(data, category, user) {
         const allData = [];

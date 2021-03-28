@@ -53,10 +53,12 @@ let UsersService = class UsersService {
             const [err, user] = await utils_1.to(this.userRepository.findOne({ email }, { select: ["id", "firstName", "lastName"] }));
             if (err)
                 throw new common_1.InternalServerErrorException();
+            if (user == null)
+                return;
             return { name: user.firstName + " " + user.lastName, id: user.id };
         }
         if (isForAuth) {
-            const [err, user] = utils_1.to(await this.userRepository.findOne({ email: email }, { select: ["id", "email", "password", "role"] }));
+            const [err, user] = await utils_1.to(this.userRepository.findOne({ email: email }, { select: ["id", "email", "password", "role"] }));
             if (err)
                 throw new common_1.InternalServerErrorException();
             return user;
@@ -69,6 +71,7 @@ let UsersService = class UsersService {
                 "lastName",
                 "role",
                 "email",
+                "avatar",
                 "createdAt",
             ],
         }));
@@ -83,6 +86,14 @@ let UsersService = class UsersService {
             .getCount());
         if (err)
             return 100;
+        return result;
+    }
+    async changeAvatar(id, name) {
+        const [err, result] = await utils_1.to(this.userRepository.update(id, { avatar: name }));
+        if (err) {
+            console.log(err);
+            throw new common_1.HttpException("Avatart can not be updated", common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return result;
     }
 };

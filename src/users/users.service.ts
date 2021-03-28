@@ -1,5 +1,7 @@
 import {
   ConflictException,
+  HttpException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
 } from "@nestjs/common";
@@ -65,11 +67,12 @@ export class UsersService {
         )
       );
       if (err) throw new InternalServerErrorException();
+      if (user == null) return;
       return { name: user.firstName + " " + user.lastName, id: user.id };
     }
     if (isForAuth) {
-      const [err, user] = to(
-        await this.userRepository.findOne(
+      const [err, user] = await to(
+        this.userRepository.findOne(
           { email: email },
           { select: ["id", "email", "password", "role"] }
         )
@@ -88,12 +91,14 @@ export class UsersService {
             "lastName",
             "role",
             "email",
+            "avatar",
             "createdAt",
           ],
         }
       )
     );
     if (err) throw new InternalServerErrorException();
+
     return user;
   }
 
@@ -106,6 +111,21 @@ export class UsersService {
         .getCount()
     );
     if (err) return 100;
+    return result;
+  }
+
+  async changeAvatar(id, name) {
+    const [err, result] = await to(
+      this.userRepository.update(id, { avatar: name })
+    );
+
+    if (err) {
+      console.log(err);
+      throw new HttpException(
+        "Avatart can not be updated",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
     return result;
   }
 }

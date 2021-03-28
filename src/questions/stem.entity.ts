@@ -23,7 +23,11 @@ export class Stem extends BaseEntity {
 
   @ManyToOne(
     () => Question,
-    (question) => question.stems
+    (question) => question.stems,
+    {
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    }
   )
   question: Question;
 }

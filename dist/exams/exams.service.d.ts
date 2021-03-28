@@ -58,4 +58,6 @@ export declare class ExamsService {
     getUserAvgResult(email: string): Promise<string[]>;
     getUserRank(email: string): Promise<number>;
     createExam(createExamDto: CreateExamDto, creator: string): Promise<any>;
+    updateExamById(id: string, createExamDto: CreateExamDto): Promise<any>;
+    deleteExam(...args: any[]): Promise<import("typeorm").DeleteResult>;
 }

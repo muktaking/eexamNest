@@ -1,4 +1,9 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as fs from "fs";
 import * as _ from "lodash";
@@ -9,6 +14,7 @@ import { Question } from "./question.entity";
 //import { Stem } from "./question.model";
 import { QuestionRepository } from "./question.repository";
 import { Stem } from "./stem.entity";
+import moment = require("moment");
 
 @Injectable()
 export class QuestionsService {
@@ -22,6 +28,13 @@ export class QuestionsService {
     console.log(err);
     if (err) throw new InternalServerErrorException();
     return questions;
+  }
+
+  async findQuestionById(id) {
+    const [err, question] = await to(this.questionRepository.findOne(+id));
+    console.log(err);
+    if (err) throw new InternalServerErrorException();
+    return question;
   }
 
   async findQuestionByFilter(filterName, filterValue) {
@@ -119,12 +132,12 @@ export class QuestionsService {
   }
 
   async updateQuestionById(
+    id: string,
     createQuestionDto: CreateQuestionDto,
     stem: { stem: Stem[]; error: string },
-    creator: string
+    modifiedBy: string
   ) {
     const {
-      id,
       title,
       category,
       qType,
@@ -143,21 +156,34 @@ export class QuestionsService {
       stems.push(stem);
     });
 
-    let [error, updatedQuestion] = await to(
-      this.questionRepository.update(id, {
-        title,
-        categoryId: +category,
-        qType,
-        qText,
-        stems: stems,
-        generalFeedback,
-        tags: tags ? tags.join(",") : null,
-        modifiedDate: Date.now(),
-        modifiedById: +creator,
-      })
-    );
-    if (error) throw new InternalServerErrorException();
-    return updatedQuestion;
+    const oldQuestion = await this.questionRepository
+      .findOne(+id)
+      .catch((e) => {
+        console.log(e);
+        throw new HttpException(
+          "Could not able to fetch oldQuestion from database ",
+          HttpStatus.INTERNAL_SERVER_ERROR
+        );
+      });
+
+    const newQuestion = { ...oldQuestion };
+    newQuestion.title = title;
+    newQuestion.categoryId = +category;
+    newQuestion.qType = qType;
+    newQuestion.qText = qText;
+    newQuestion.generalFeedback = generalFeedback ? generalFeedback : null;
+    newQuestion.tags = tags ? tags.join(",") : null;
+    newQuestion.modifiedDate = moment().format("YYYY-MM-DD HH=mm=sss");
+    newQuestion.modifiedById = +modifiedBy;
+    newQuestion.stems = stems;
+
+    await this.questionRepository.delete(+id);
+    return await this.questionRepository.save(newQuestion);
+  }
+
+  async deleteQuestion(...args) {
+    const res = await this.questionRepository.delete(args);
+    return { message: "Question deleted successfully" };
   }
 
   // function to validate and convert uploaded excel data into a collection

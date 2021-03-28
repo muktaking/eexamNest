@@ -28,4 +28,7 @@ export declare class ExamsController {
         };
         questions: any;
     }>;
+    updateExamById(examId: any, createExamDto: CreateExamDto): Promise<any>;
+    deleteQuestionById(examId: any): Promise<import("typeorm").DeleteResult>;
+    deleteQuestion(examIds: any): Promise<import("typeorm").DeleteResult>;
 }

@@ -59,7 +59,7 @@ export class Question extends BaseEntity {
   createDate: Timestamp;
 
   @Column({ type: "timestamp" })
-  modifiedDate: Timestamp;
+  modifiedDate: Timestamp | string;
 
   @Column()
   creatorId: number;

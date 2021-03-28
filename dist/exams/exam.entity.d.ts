@@ -27,6 +27,6 @@ export declare class Exam extends BaseEntity {
     singleStemMark: number;
     penaltyMark: number;
     timeLimit: number;
-    createdAt: Timestamp;
+    createdAt: Timestamp | string;
     creatorId: number;
 }

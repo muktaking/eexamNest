@@ -30,7 +30,10 @@ __decorate([
     __metadata("design:type", String)
 ], Stem.prototype, "fbStem", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => question_entity_1.Question, (question) => question.stems),
+    typeorm_1.ManyToOne(() => question_entity_1.Question, (question) => question.stems, {
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+    }),
     __metadata("design:type", question_entity_1.Question)
 ], Stem.prototype, "question", void 0);
 Stem = __decorate([
