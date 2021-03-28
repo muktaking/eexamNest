@@ -16,6 +16,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const bcrypt = require("bcryptjs");
 const utils_1 = require("../utils/utils");
+const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 const user_repository_1 = require("./user.repository");
 let UsersService = class UsersService {
@@ -45,8 +46,22 @@ let UsersService = class UsersService {
                 throw new common_1.InternalServerErrorException();
         }
     }
-    async findAllUsers() {
-        return await this.userRepository.find({});
+    async findAllUsers(userRole) {
+        return await this.userRepository.find({
+            select: [
+                "id",
+                "firstName",
+                "userName",
+                "lastName",
+                "role",
+                "email",
+                "avatar",
+                "createdAt",
+            ],
+            where: {
+                role: typeorm_2.LessThan(userRole),
+            },
+        });
     }
     async findOneUser(email, nameOnly = false, isForAuth = false) {
         if (nameOnly) {

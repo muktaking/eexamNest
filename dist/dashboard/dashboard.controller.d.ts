@@ -7,4 +7,8 @@ export declare class DashboardController {
         featuredExams: any;
         userExamStat: any;
     }>;
+    getAdminDashInfo(req: any): Promise<{
+        users: any;
+        exams: any;
+    }>;
 }

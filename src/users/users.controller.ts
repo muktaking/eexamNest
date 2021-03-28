@@ -18,10 +18,10 @@ export class UsersController {
     return await this.userService.changeAvatar(req.user.id, name);
   }
 
-  @Get("all")
-  async getAlltUsers(): Promise<any> {
-    return await this.userService.findAllUsers();
-  }
+  // @Get("all")
+  // async getAlltUsers(): Promise<any> {
+  //   return await this.userService.findAllUsers();
+  // }
 
   // @Get("all")
   // async geAlltUsers(): Promise<any> {

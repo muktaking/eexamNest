@@ -25,6 +25,9 @@ let DashboardController = class DashboardController {
     async getStudentDashInfo(req) {
         return await this.dashboardService.getStudentDashInfo(req.user.email);
     }
+    async getAdminDashInfo(req) {
+        return await this.dashboardService.getAdminDashInfo(req.user.role);
+    }
 };
 __decorate([
     common_1.Get(),
@@ -35,6 +38,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], DashboardController.prototype, "getStudentDashInfo", null);
+__decorate([
+    common_1.Get("admin"),
+    common_1.UseGuards(passport_1.AuthGuard("jwt"), roles_guard_1.RolesGuard),
+    roles_decorator_1.Role(user_model_1.RolePermitted.mentor),
+    __param(0, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], DashboardController.prototype, "getAdminDashInfo", null);
 DashboardController = __decorate([
     common_1.Controller("dashboard"),
     __metadata("design:paramtypes", [dashboard_service_1.DashboardService])

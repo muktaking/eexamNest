@@ -17,10 +17,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const category_repository_1 = require("../categories/category.repository");
 const exam_repository_1 = require("../exams/exam.repository");
 const exams_service_1 = require("../exams/exams.service");
+const users_service_1 = require("../users/users.service");
 const utils_1 = require("../utils/utils");
 const typeorm_2 = require("typeorm");
 let DashboardService = class DashboardService {
-    constructor(categoryRepository, examRepository, examService) {
+    constructor(usersService, categoryRepository, examRepository, examService) {
+        this.usersService = usersService;
         this.categoryRepository = categoryRepository;
         this.examRepository = examRepository;
         this.examService = examService;
@@ -41,6 +43,11 @@ let DashboardService = class DashboardService {
             throw new common_1.InternalServerErrorException();
         const featuredExams = await this.getFeaturedExams();
         return { userExamInfo, featuredExams, userExamStat };
+    }
+    async getAdminDashInfo(userRole) {
+        const [err, users] = await utils_1.to(this.usersService.findAllUsers(userRole));
+        const [err1, exams] = await utils_1.to(this.examService.findAllExams());
+        return { users, exams };
     }
     async getFeaturedExams() {
         const [err, exams] = await utils_1.to(this.examRepository.find({
@@ -66,9 +73,10 @@ let DashboardService = class DashboardService {
 };
 DashboardService = __decorate([
     common_1.Injectable(),
-    __param(0, typeorm_1.InjectRepository(category_repository_1.CategoryRepository)),
-    __param(1, typeorm_1.InjectRepository(exam_repository_1.ExamRepository)),
-    __metadata("design:paramtypes", [category_repository_1.CategoryRepository,
+    __param(1, typeorm_1.InjectRepository(category_repository_1.CategoryRepository)),
+    __param(2, typeorm_1.InjectRepository(exam_repository_1.ExamRepository)),
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        category_repository_1.CategoryRepository,
         exam_repository_1.ExamRepository,
         exams_service_1.ExamsService])
 ], DashboardService);

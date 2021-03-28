@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   Timestamp,
 } from "typeorm";
+import { ExamType } from "./exam.entity";
 import { Profile } from "./profile.entity";
 
 function percentage(num, per) {
@@ -31,6 +32,12 @@ export class ExamProfile extends BaseEntity {
 
   @Column()
   examId: number;
+
+  @Column()
+  examTitle: string;
+
+  @Column({ type: "enum", enum: ExamType })
+  examType: ExamType;
 
   @Column({ default: 1 })
   attemptNumbers: number;

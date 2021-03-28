@@ -4,5 +4,4 @@ export declare class UsersController {
     constructor(userService: UsersService);
     getUserById(req: any): Promise<any>;
     changeAvatar(req: any, name: any): Promise<any>;
-    getAlltUsers(): Promise<any>;
 }

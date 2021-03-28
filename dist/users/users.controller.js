@@ -25,9 +25,6 @@ let UsersController = class UsersController {
     async changeAvatar(req, name) {
         return await this.userService.changeAvatar(req.user.id, name);
     }
-    async getAlltUsers() {
-        return await this.userService.findAllUsers();
-    }
 };
 __decorate([
     common_1.Get(),
@@ -45,12 +42,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "changeAvatar", null);
-__decorate([
-    common_1.Get("all"),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "getAlltUsers", null);
 UsersController = __decorate([
     common_1.Controller("users"),
     __metadata("design:paramtypes", [users_service_1.UsersService])

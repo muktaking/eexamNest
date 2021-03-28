@@ -8,6 +8,7 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import * as bcrypt from "bcryptjs";
 import { to } from "src/utils/utils";
+import { LessThan } from "typeorm";
 import { createUserDto } from "./dto/create-user.dto";
 import { RolePermitted, User } from "./user.entity";
 import { UserRepository } from "./user.repository";
@@ -50,8 +51,22 @@ export class UsersService {
     }
   }
 
-  async findAllUsers() {
-    return await this.userRepository.find({});
+  async findAllUsers(userRole) {
+    return await this.userRepository.find({
+      select: [
+        "id",
+        "firstName",
+        "userName",
+        "lastName",
+        "role",
+        "email",
+        "avatar",
+        "createdAt",
+      ],
+      where: {
+        role: LessThan(userRole),
+      },
+    });
   }
 
   async findOneUser(

@@ -41,6 +41,8 @@ let PostexamsService = class PostexamsService {
         let profile = await this.examService.findProfileByUserEmail(user.email);
         let examStat = {
             id: null,
+            title: "",
+            type: null,
             attemptNumbers: null,
             averageScore: 0,
             totalMark: null,
@@ -56,6 +58,8 @@ let PostexamsService = class PostexamsService {
         if (!profile) {
             profile = new profile_entity_1.Profile();
             examStat.examId = examId;
+            examStat.examTitle = exam.title;
+            examStat.examType = exam.type;
             examStat.attemptNumbers = 1;
             examStat.totalMark = this.totalMark;
             examStat.firstAttemptTime = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -68,6 +72,8 @@ let PostexamsService = class PostexamsService {
             if (!examStat) {
                 examStat = {
                     examId: +examId,
+                    examTitle: exam.title,
+                    examType: exam.type,
                     attemptNumbers: 1,
                     totalMark: this.totalMark,
                     firstAttemptTime: moment().format("YYYY-MM-DD HH:mm:ss"),

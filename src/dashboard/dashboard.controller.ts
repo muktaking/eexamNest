@@ -14,4 +14,11 @@ export class DashboardController {
   async getStudentDashInfo(@Req() req) {
     return await this.dashboardService.getStudentDashInfo(req.user.email);
   }
+
+  @Get("admin")
+  @UseGuards(AuthGuard("jwt"), RolesGuard)
+  @Role(RolePermitted.mentor)
+  async getAdminDashInfo(@Req() req) {
+    return await this.dashboardService.getAdminDashInfo(req.user.role);
+  }
 }

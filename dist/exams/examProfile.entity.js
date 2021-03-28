@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const exam_entity_1 = require("./exam.entity");
 const profile_entity_1 = require("./profile.entity");
 function percentage(num, per) {
     return (num / 100) * per;
@@ -37,6 +38,14 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Number)
 ], ExamProfile.prototype, "examId", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], ExamProfile.prototype, "examTitle", void 0);
+__decorate([
+    typeorm_1.Column({ type: "enum", enum: exam_entity_1.ExamType }),
+    __metadata("design:type", Number)
+], ExamProfile.prototype, "examType", void 0);
 __decorate([
     typeorm_1.Column({ default: 1 }),
     __metadata("design:type", Number)

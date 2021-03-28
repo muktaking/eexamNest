@@ -24,7 +24,7 @@ export declare class ExamsService {
         result: string[];
     }>;
     findUserExamStat(email: string): Promise<{
-        examTitles: any;
+        examTitles: any[];
         stat: any[];
     }>;
     findTotalExamTaken(email: string): Promise<any>;

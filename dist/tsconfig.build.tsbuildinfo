@@ -2718,12 +2718,12 @@
         "signature": "2d7f7a683f097f249e7dc208ebc0a8193339afe1e76ed041d613280183e3c04a"
       },
       "../src/users/users.service.ts": {
-        "version": "29550f0328026c59aa58af8f53376e0acdfaea7e846ce2b71ed88a337c9ab678",
-        "signature": "4fa51f6034c8399d17c2fb073ae1a010bfca1b8bee69424c5f99cb7c703432e7"
+        "version": "e3557ad111501a0972ae0e8677256af02e93dcce28e57aefcc29354d32c06e4b",
+        "signature": "30cbc70c56782e7ea741fee455d69e6b664b6bafb1fb87a02fb78f4e44d30e79"
       },
       "../src/users/users.controller.ts": {
-        "version": "b2e76bda8622946ff30f8165ac68bc0b2d1d91c9b47341265fb2f9d6e203c610",
-        "signature": "809dad9ab8d9dda4aaf7b459e5f6f1ca7c882f35f1b8df32dff791aff099f7d0"
+        "version": "4f19bfc1c00a06f7a9ed8bcd726eda06bb53dd33732bc2cafe806f8fefb342a7",
+        "signature": "1f63b9fedf25f9e561a9ed8397358545de23a00d765688f8cef72dfe7b85fc95"
       },
       "../src/users/users.module.ts": {
         "version": "989da71e322a37414dee21cc36a0c6858b04d643a0f861578ce7a383ecbc3fba",
@@ -2994,12 +2994,12 @@
         "signature": "955f7339e11ae3fa7151f59f280ea4208c060686ee3d52547c67baf58bd25d89"
       },
       "../src/exams/examprofile.entity.ts": {
-        "version": "5aab4268f70e97336a1205da463ecf45c519f45a72eaeaacf6d9de01f5cd8d31",
-        "signature": "6c7b0a411ebfe5265288d8473cdd164521e9f6449ef9591e9bf1d79e3154e18c"
+        "version": "96e9e3fba71a0263ab2bc621c65c68a5281ade673b283506bc4ddc9d605608bb",
+        "signature": "ad3fa4ebeeb5d9d7936f8192e424b9f4ac81a173b2b64f5b0dcae8877ebe01b0"
       },
       "../src/exams/profile.entity.ts": {
-        "version": "41723943f7d9f949fbdb1f01a84561c4bc7e5e10dad0981fc79d1daa6a8b1929",
-        "signature": "b133f40b5138a358520152fd1abd933af93057d41ca59781cfd7d208a9bc6a0c"
+        "version": "1168bdec25d2b8525ad3a086a6abb1455b072e74116c7e93680d24783275dd71",
+        "signature": "d3b43767ed61f8addbb2b31d24c5c96c4c81ba45500a78502043295b1f290ad3"
       },
       "../src/exams/profie.repository.ts": {
         "version": "4183e80d69c9e961f76675a43760a466a15e1bc48e06efaaa88e8a21a7b3325d",
@@ -3010,8 +3010,8 @@
         "signature": "f97edc4d3b4dd0b32766e9633086497565c37657fb591cc84a35864db4bc2fc5"
       },
       "../src/exams/exams.service.ts": {
-        "version": "e394b2fd9981fe915acf8c6a4303f77ad3648b8eb3e106281f7e33bbd4558048",
-        "signature": "081d0b3a5ff818649e6ab5cbc3e9484ed66eef2145d9e21a4bdfe285de6d3985"
+        "version": "d5a18d61e703d15bc68da9f6b75054036a95ee3f85f0c7efe572618e60006448",
+        "signature": "f45c43de89e4ccabb7032f5f867f62a47aa99fd3740227c6f097816de7dd19fe"
       },
       "../src/exams/exams.controller.ts": {
         "version": "98631720a705a8053568f635d04ce2640e03e432091f81ad33348d24032eec53",
@@ -3022,15 +3022,15 @@
         "signature": "904cd600097d2278f2782ecdb8be6706901685006f68bbdcbae2e4b680cfce01"
       },
       "../src/dashboard/dashboard.service.ts": {
-        "version": "61ef70244ae2c43ab09d3449061467276658f4e1258700e732fe9eb372127672",
-        "signature": "c5fa7f3c0b16a62bcd4ca62e7860ebd96e18d51212ca55cdcba62f08d817d26e"
+        "version": "e027e63ea128f8b5ae566e953a9e1f4611660cd155ad51a4f90eb8b0cc7e9bf8",
+        "signature": "c90b4c2b892efa67c8672862e1f4f803be88975d61c89269065be5d299b008b2"
       },
       "../src/dashboard/dashboard.controller.ts": {
-        "version": "d87a637bead31fb1e6049d0b45295285f900733ebd4d3838b5940f05b7dc335b",
-        "signature": "77a743831bedd86a3f73550aa912e75788e75633a01ac7160d2cd663a5389ca9"
+        "version": "e634203526d13c6bf2739f0126a5ca4e27aac551765672285329bfe24da09cd6",
+        "signature": "fd9ac36c48b70e5a9f6944f4c836802249559a7a5fa7c32a9e3fd3a97f77bd17"
       },
       "../src/dashboard/dashboard.module.ts": {
-        "version": "56ec0cf49dc2b4e66090d28f257059920f84987bb05c46032ba94932a2fd7946",
+        "version": "561149f4fc60591ca73f829b1647c94006585e088061edeb924cef9ae2f82eb7",
         "signature": "7dfc0dea2801af122d19df735dd15d7bb9f5b594eda3e867cb357dd6d786c30a"
       },
       "../src/postexams/dto/get-answers.dto.ts": {
@@ -3050,7 +3050,7 @@
         "signature": "a908103c2809287586624b71d6114b10dd31d4cfe68b246ad3e69980bc319ead"
       },
       "../src/postexams/postexams.service.ts": {
-        "version": "e1fc36fef4e06ef2de75be2604445001892a0e348d8992b3defa0c9a644b08c6",
+        "version": "188902386e020d04163681fd4a68f44dd1b110b77c1b507a7e43da8e2e593087",
         "signature": "0b5a23608d2cbe0bb800e029373d4e9f72ac7ae768971470a536eaf266751ebf"
       },
       "../src/postexams/postexams.controller.ts": {
@@ -8867,6 +8867,7 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
         "../src/utils/utils.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/users/dto/create-user.dto.ts",
         "../src/users/user.entity.ts",
         "../src/users/user.repository.ts",
@@ -9477,6 +9478,7 @@
       ],
       "../src/exams/examprofile.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/exams/exam.entity.ts",
         "../src/exams/profile.entity.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -9485,6 +9487,7 @@
       ],
       "../src/exams/profile.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/exams/exam.entity.ts",
         "../src/exams/examprofile.entity.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -9559,6 +9562,7 @@
         "../src/categories/category.repository.ts",
         "../src/exams/exam.repository.ts",
         "../src/exams/exams.service.ts",
+        "../src/users/users.service.ts",
         "../src/utils/utils.ts",
         "../node_modules/typeorm/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -9584,6 +9588,7 @@
         "../src/categories/category.repository.ts",
         "../src/exams/exam.repository.ts",
         "../src/exams/exams.module.ts",
+        "../src/users/users.module.ts",
         "../src/dashboard/dashboard.controller.ts",
         "../src/dashboard/dashboard.service.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -10306,7 +10311,8 @@
       "../src/dashboard/dashboard.service.ts": [
         "../src/categories/category.repository.ts",
         "../src/exams/exam.repository.ts",
-        "../src/exams/exams.service.ts"
+        "../src/exams/exams.service.ts",
+        "../src/users/users.service.ts"
       ],
       "../src/exams/exams.controller.ts": [
         "../src/exams/dto/exam.dto.ts",
@@ -12756,10 +12762,12 @@
       ],
       "../src/exams/profile.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/exams/exam.entity.ts",
         "../src/exams/examprofile.entity.ts"
       ],
       "../src/exams/examprofile.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/exams/exam.entity.ts",
         "../src/exams/profile.entity.ts"
       ],
       "../src/questions/question.repository.ts": [

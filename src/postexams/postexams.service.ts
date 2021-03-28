@@ -1,7 +1,7 @@
 import {
   Injectable,
   InternalServerErrorException,
-  Scope
+  Scope,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as _ from "lodash";
@@ -60,6 +60,8 @@ export class PostexamsService {
     let examStat: ExamStat | any = {
       // creating a null exam stat
       id: null,
+      title: "",
+      type: null,
       attemptNumbers: null,
       averageScore: 0,
       totalMark: null,
@@ -81,6 +83,8 @@ export class PostexamsService {
       // if user has no profile && has no previous attempt to this exam
       profile = new Profile(); // then, create a new exam profile & exam stat
       examStat.examId = examId;
+      examStat.examTitle = exam.title;
+      examStat.examType = exam.type;
       examStat.attemptNumbers = 1;
       examStat.totalMark = this.totalMark;
       examStat.firstAttemptTime = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -93,6 +97,8 @@ export class PostexamsService {
       if (!examStat) {
         examStat = {
           examId: +examId,
+          examTitle: exam.title,
+          examType: exam.type,
           attemptNumbers: 1,
           totalMark: this.totalMark,
           firstAttemptTime: moment().format("YYYY-MM-DD HH:mm:ss"),

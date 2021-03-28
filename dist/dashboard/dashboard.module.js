@@ -11,6 +11,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const category_repository_1 = require("../categories/category.repository");
 const exam_repository_1 = require("../exams/exam.repository");
 const exams_module_1 = require("../exams/exams.module");
+const users_module_1 = require("../users/users.module");
 const dashboard_controller_1 = require("./dashboard.controller");
 const dashboard_service_1 = require("./dashboard.service");
 let DashboardModule = class DashboardModule {
@@ -22,6 +23,7 @@ DashboardModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forFeature([exam_repository_1.ExamRepository, category_repository_1.CategoryRepository]),
             exams_module_1.ExamsModule,
+            users_module_1.UsersModule,
         ],
     })
 ], DashboardModule);

@@ -6,10 +6,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { ExamType } from "./exam.entity";
 import { ExamProfile } from "./examProfile.entity";
 
 export interface ExamStat {
   id: string;
+  title: string;
+  type: ExamType;
   attemptNumbers: number;
   averageScore: number;
   totalMark: number;

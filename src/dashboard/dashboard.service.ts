@@ -3,12 +3,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { CategoryRepository } from "src/categories/category.repository";
 import { ExamRepository } from "src/exams/exam.repository";
 import { ExamsService } from "src/exams/exams.service";
+import { UsersService } from "src/users/users.service";
 import { to } from "src/utils/utils";
 import { Like } from "typeorm";
 
 @Injectable()
 export class DashboardService {
   constructor(
+    private usersService: UsersService,
     @InjectRepository(CategoryRepository)
     private categoryRepository: CategoryRepository,
     @InjectRepository(ExamRepository)
@@ -41,6 +43,13 @@ export class DashboardService {
     const featuredExams = await this.getFeaturedExams();
 
     return { userExamInfo, featuredExams, userExamStat };
+  }
+
+  async getAdminDashInfo(userRole) {
+    const [err, users] = await to(this.usersService.findAllUsers(userRole));
+
+    const [err1, exams] = await to(this.examService.findAllExams());
+    return { users, exams };
   }
 
   async getFeaturedExams() {

@@ -83,6 +83,7 @@ export class ExamsService {
   async findUserExamStat(email: string) {
     const examIds = [];
     const stat = [];
+    const examTitles = [];
     const [err, profile] = await to(
       this.examProfileRepository.findOne({
         user: email,
@@ -92,6 +93,7 @@ export class ExamsService {
     profile &&
       profile.exams.map((e) => {
         examIds.push(e.examId);
+        examTitles.push({ title: e.examTitle, type: e.examType });
         stat.push({
           attemptNumbers: e.attemptNumbers,
           averageScore: e.averageScore,
@@ -99,14 +101,13 @@ export class ExamsService {
           lastAttemptTime: e.lastAttemptTime,
         });
       });
-
-    const [err1, examTitles] = await to(
-      this.examRepository.find({
-        select: ["title", "type"],
-        where: { id: In(examIds) },
-      })
-    );
-    if (err1) throw new InternalServerErrorException();
+    // const [err1, examTitles] = await to(
+    //   this.examRepository.find({
+    //     select: ["title", "type"],
+    //     where: { id: In(examIds) },
+    //   })
+    // );
+    // if (err1) throw new InternalServerErrorException();
 
     return { examTitles: examTitles.reverse(), stat: stat.reverse() };
   }
