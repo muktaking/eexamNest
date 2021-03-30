@@ -42,7 +42,6 @@ let CategoriesController = class CategoriesController {
             .resize(350, 180)
             .png()
             .toBuffer();
-        console.log(image);
         const resizeImageName = image.filename.split(".")[0] + "_350_180.png";
         const resizeImagePathName = "./uploads/images/" + resizeImageName;
         fs.writeFileSync(resizeImagePathName, resizeImage);

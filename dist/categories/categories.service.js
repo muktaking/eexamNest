@@ -16,14 +16,17 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const config = require("config");
 const _ = require("lodash");
+const question_entity_1 = require("../questions/question.entity");
+const question_repository_1 = require("../questions/question.repository");
 const utils_1 = require("../utils/utils");
 const category_entity_1 = require("./category.entity");
 const category_repository_1 = require("./category.repository");
 const serverConfig = config.get("server");
 const SERVER_URL = `${serverConfig.url}:${serverConfig.port}/`;
 let CategoriesService = class CategoriesService {
-    constructor(categoryRepository) {
+    constructor(categoryRepository, questionRepository) {
         this.categoryRepository = categoryRepository;
+        this.questionRepository = questionRepository;
     }
     async findAllCategories() {
         const [err, categories] = await utils_1.to(this.categoryRepository.find({ order: { slug: "ASC" } }));
@@ -186,6 +189,36 @@ let CategoriesService = class CategoriesService {
             try {
                 await this.categoryRepository.delete({ id: +id });
                 utils_1.deleteImageFile(categoryToDelete.imageUrl);
+                const haveAnyQuestion = await this.questionRepository.findOne({
+                    categoryId: +id,
+                });
+                if (haveAnyQuestion) {
+                    let [uncategorized] = await category_entity_1.Category.find({
+                        name: "Uncategorized",
+                        parentId: null,
+                    });
+                    if (!uncategorized) {
+                        uncategorized = new category_entity_1.Category();
+                        uncategorized.name = "Uncategorized";
+                        uncategorized.parentId = null;
+                        uncategorized.slug = "Top / Uncategorized";
+                        uncategorized.order = 10000;
+                        uncategorized.description = "All uncategorized topics";
+                        uncategorized.imageUrl = "/bootstrap/uncat.png";
+                        await uncategorized.save();
+                    }
+                    await this.questionRepository
+                        .createQueryBuilder()
+                        .update(question_entity_1.Question)
+                        .set({
+                        categoryId: uncategorized.id,
+                    })
+                        .where({
+                        categoryId: +id,
+                    })
+                        .execute();
+                }
+                return { message: "Category deleted successfully" };
             }
             catch (error) {
                 console.log(error);
@@ -203,7 +236,8 @@ let CategoriesService = class CategoriesService {
 CategoriesService = __decorate([
     common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(category_repository_1.CategoryRepository)),
-    __metadata("design:paramtypes", [category_repository_1.CategoryRepository])
+    __metadata("design:paramtypes", [category_repository_1.CategoryRepository,
+        question_repository_1.QuestionRepository])
 ], CategoriesService);
 exports.CategoriesService = CategoriesService;
 //# sourceMappingURL=categories.service.js.map

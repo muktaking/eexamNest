@@ -12,5 +12,7 @@ export declare class CategoriesController {
     updateCategory(id: string, createCategoryDto: createCategoryDto, image: any): Promise<{
         msg: string;
     }>;
-    deleteCategoryById(id: string): Promise<void>;
+    deleteCategoryById(id: string): Promise<{
+        message: string;
+    }>;
 }

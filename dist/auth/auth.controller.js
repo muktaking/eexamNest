@@ -26,7 +26,10 @@ let AuthController = class AuthController {
         return await this.usersService.createUser(createUserDto);
     }
     async logIn(req) {
-        return this.authService.login(req.user);
+        return await this.authService.login(req.user);
+    }
+    async reset(email) {
+        return await this.authService.reset(email);
     }
 };
 __decorate([
@@ -44,6 +47,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logIn", null);
+__decorate([
+    common_1.Post("/reset"),
+    __param(0, common_1.Body("email")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "reset", null);
 AuthController = __decorate([
     common_1.Controller("auth"),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

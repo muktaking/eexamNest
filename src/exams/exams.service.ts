@@ -235,7 +235,7 @@ export class ExamsService {
       );
       if (err) throw new InternalServerErrorException();
 
-      questions.map((question) => {
+      questions.forEach((question) => {
         question.stems.map((stem, index) => {
           question.stems[index] = stem.qStem; //_.pick(stem, ["qStem"]);
         });

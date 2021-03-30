@@ -1,16 +1,30 @@
-import { Injectable } from "@nestjs/common";
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { InjectRepository } from "@nestjs/typeorm";
 import * as bcrypt from "bcryptjs";
 import * as config from "config";
+import * as crypto from "crypto";
 import * as _ from "lodash";
+import * as nodemailer from "nodemailer";
+import { UserRepository } from "src/users/user.repository";
 import { UsersService } from "../users/users.service";
 import { jwtPayload } from "./jwt.interface";
+import moment = require("moment");
 
 const jwtConfig = config.get("jwt");
+const emailConfig = config.get("email");
+const baseSiteConfig = config.get("base_site");
 
 @Injectable()
 export class AuthService {
   constructor(
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService
   ) {}
@@ -39,5 +53,75 @@ export class AuthService {
       id: user.id,
       expireIn: process.env.JWT_EXPIRESIN || jwtConfig.expiresIn,
     };
+  }
+
+  async reset(email: string) {
+    console.log(email);
+    crypto.randomBytes(32, (err, buffer) => {
+      if (err) {
+        console.log(err);
+        throw new InternalServerErrorException();
+      }
+
+      const token = buffer.toString("hex");
+      this.userRepository
+        .findOne({ email })
+        .then((user) => {
+          if (!user) {
+            throw new HttpException(
+              "User is not available",
+              HttpStatus.NOT_FOUND
+            ); // DO SOME RENDER PAGE
+          }
+          user.resetToken = token;
+          user.resetTokenExpiration = moment(
+            Date.now() + 3 * 60 * 60 * 1000
+          ).format("YYYY-MM-DD HH=mm=sss");
+          user
+            .save()
+            .then((saved) => {
+              // create reusable transporter object using the default SMTP transport
+              let transporter = nodemailer.createTransport({
+                host: process.env.EMAIL_HOST || emailConfig.host,
+                port: process.env.EMAIL_PORT || emailConfig.port,
+                secure: process.env.IS_SECURE || emailConfig.is_secure, // true for 465, false for other ports
+                auth: {
+                  user: process.env.EMAIL_USER || emailConfig.user, // generated ethereal user
+                  pass: process.env.EMAIL_PASSWORD || emailConfig.password, // generated ethereal password
+                },
+                tls: {
+                  rejectUnauthorized: false,
+                },
+              });
+
+              // setup email data with unicode symbols
+              let mailOptions = {
+                from: `"No-reply" <${process.env.EMAIL_USER ||
+                  emailConfig.user}>`, // sender address
+                to: email, // list of receivers
+                subject: "Reset Your Password, ", // Subject line
+                html: `<h3>Reset Your Password</h3>
+                          <p>If you request for password reset, click this <a href="${process
+                            .env.BASE_SITE_URL ||
+                            baseSiteConfig.url}/reset/${token}">reset link</a></p>
+                  `, // html body
+              };
+              // send mail with defined transport object
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.log(error);
+                }
+                console.log(info);
+              });
+              return { message: "Reset password successfull" };
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   }
 }

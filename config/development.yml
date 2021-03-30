@@ -3,3 +3,11 @@ db:
   port: 27017
   database: "nest-tut"
   host: "localhost"
+base_site:
+  url: "http://localhost:3000"
+email:
+  host: "mail.rajdoctors.com"
+  port: "465"
+  is_secure: true
+  user: "no-reply@rajdoctors.com"
+  password: "z7#nEO*L6QbF"

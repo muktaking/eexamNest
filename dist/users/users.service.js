@@ -30,6 +30,7 @@ let UsersService = class UsersService {
         user.lastName = lastName;
         user.userName = userName;
         user.email = email;
+        user.avatar = "boy";
         user.gender = gender;
         try {
             const salt = await bcrypt.genSalt(10);

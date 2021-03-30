@@ -185,7 +185,7 @@ let ExamsService = class ExamsService {
             }));
             if (err)
                 throw new common_1.InternalServerErrorException();
-            questions.map((question) => {
+            questions.forEach((question) => {
                 question.stems.map((stem, index) => {
                     question.stems[index] = stem.qStem;
                 });

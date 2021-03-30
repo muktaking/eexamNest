@@ -1,3 +1,11 @@
 db:
   username: eexam
   password: Y6zaVTTag9reunXM
+base_site:
+  url: "http://exam.rajdoctors.com"
+email:
+  host:
+  port:
+  is_secure:
+  user:
+  password:

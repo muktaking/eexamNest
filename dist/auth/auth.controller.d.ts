@@ -11,4 +11,5 @@ export declare class AuthController {
         id: any;
         expireIn: any;
     }>;
+    reset(email: string): Promise<void>;
 }

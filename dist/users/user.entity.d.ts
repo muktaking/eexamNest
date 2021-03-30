@@ -22,4 +22,6 @@ export declare class User extends BaseEntity {
     gender: Gender;
     role: RolePermitted;
     createdAt: Timestamp;
+    resetToken: string;
+    resetTokenExpiration: string;
 }

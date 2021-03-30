@@ -30,7 +30,13 @@ export class AuthController {
     // @Body("password", ValidationPipe) password: string,
     @Req() req
   ) {
-    return this.authService.login(req.user);
+    return await this.authService.login(req.user);
+    //return await this.usersService.validateUser(email, password);
+  }
+
+  @Post("/reset")
+  async reset(@Body("email") email: string) {
+    return await this.authService.reset(email);
     //return await this.usersService.validateUser(email, password);
   }
 }

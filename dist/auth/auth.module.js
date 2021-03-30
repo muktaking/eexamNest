@@ -9,7 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
+const typeorm_1 = require("@nestjs/typeorm");
 const config = require("config");
+const user_repository_1 = require("../users/user.repository");
 const users_module_1 = require("../users/users.module");
 const auth_controller_1 = require("./auth.controller");
 const auth_service_1 = require("./auth.service");
@@ -21,6 +23,7 @@ let AuthModule = class AuthModule {
 AuthModule = __decorate([
     common_1.Module({
         imports: [
+            typeorm_1.TypeOrmModule.forFeature([user_repository_1.UserRepository]),
             passport_1.PassportModule,
             jwt_1.JwtModule.register({
                 secret: process.env.JWT_SECRET || jwtConfig.secret,

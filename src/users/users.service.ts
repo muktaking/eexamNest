@@ -35,6 +35,7 @@ export class UsersService {
     user.lastName = lastName;
     user.userName = userName;
     user.email = email;
+    user.avatar = "boy";
     user.gender = gender;
 
     //hashing password

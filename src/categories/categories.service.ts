@@ -6,6 +6,8 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import * as config from "config";
 import * as _ from "lodash";
+import { Question } from "src/questions/question.entity";
+import { QuestionRepository } from "src/questions/question.repository";
 import { deleteImageFile, firstltrCapRestLow, to } from "../utils/utils";
 import { Category } from "./category.entity";
 import { CategoryRepository } from "./category.repository";
@@ -18,7 +20,8 @@ const SERVER_URL = `${serverConfig.url}:${serverConfig.port}/`;
 export class CategoriesService {
   constructor(
     @InjectRepository(CategoryRepository)
-    private categoryRepository: CategoryRepository
+    private categoryRepository: CategoryRepository,
+    private questionRepository: QuestionRepository
   ) {}
 
   async findAllCategories() {
@@ -201,26 +204,37 @@ export class CategoriesService {
       try {
         await this.categoryRepository.delete({ id: +id });
         deleteImageFile(categoryToDelete.imageUrl);
-        //
-        // const haveAnyQuestion = await QuestionModel.findOne({category: catId});
-        // if(haveAnyQuestion){
-        //     if(categoryToDelete.parentId === null){
-        //         let [checkOthers] = await Category.find({name: 'Others', parentId: null});
-        //         if(!checkOthers){
-        //             checkOthers = new Category({
-        //                 name: 'Others',
-        //                 parentId: null,
-        //                 slug: 'Top / Others',
-        //                 order: 10000,
-        //                 catDescribe: 'All other non-categorized topics'
-        //             })
-        //             checkOthers = await checkOthers.save();
-        //         }
-        //         await QuestionModel.updateMany({category: catId},{$set:{category: checkOthers._id}});
-        //         return res.redirect('/category');
-        //     }
-        //     await Question.updateMany({category: catId},{$set:{category: categoryToDelete.parentId}});
-        //     return res.redirect('/category');
+        // search for questions and shift them to uncategorized
+        const haveAnyQuestion = await this.questionRepository.findOne({
+          categoryId: +id,
+        });
+        if (haveAnyQuestion) {
+          let [uncategorized] = await Category.find({
+            name: "Uncategorized",
+            parentId: null,
+          });
+          if (!uncategorized) {
+            uncategorized = new Category();
+            uncategorized.name = "Uncategorized";
+            uncategorized.parentId = null;
+            uncategorized.slug = "Top / Uncategorized";
+            uncategorized.order = 10000;
+            uncategorized.description = "All uncategorized topics";
+            uncategorized.imageUrl = "/bootstrap/uncat.png";
+            await uncategorized.save();
+          }
+          await this.questionRepository
+            .createQueryBuilder()
+            .update(Question)
+            .set({
+              categoryId: uncategorized.id,
+            })
+            .where({
+              categoryId: +id,
+            })
+            .execute();
+        }
+        return { message: "Category deleted successfully" };
       } catch (error) {
         console.log(error);
         throw new InternalServerErrorException();

@@ -70,8 +70,6 @@ export class CategoriesController {
       .png()
       .toBuffer();
 
-    console.log(image);
-
     const resizeImageName = image.filename.split(".")[0] + "_350_180.png";
 
     const resizeImagePathName = "./uploads/images/" + resizeImageName;

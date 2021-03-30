@@ -66,6 +66,14 @@ __decorate([
     typeorm_1.Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", typeorm_1.Timestamp)
 ], User.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "resetToken", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "resetTokenExpiration", void 0);
 User = __decorate([
     typeorm_1.Entity()
 ], User);
