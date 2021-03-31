@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], Question.prototype, "qType", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: "text" }),
     __metadata("design:type", String)
 ], Question.prototype, "qText", void 0);
 __decorate([
@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Question.prototype, "stems", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: true }),
+    typeorm_1.Column({ type: "text", nullable: true }),
     __metadata("design:type", String)
 ], Question.prototype, "generalFeedback", void 0);
 __decorate([

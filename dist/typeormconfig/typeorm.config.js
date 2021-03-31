@@ -8,6 +8,9 @@ exports.typeOrmConfig = {
     password: "11292",
     database: "eexammysql",
     entities: [__dirname + "/../**/*.entity{.ts,.js}"],
+    extra: {
+        charset: "utf8_unicode_ci",
+    },
     synchronize: true,
 };
 //# sourceMappingURL=typeorm.config.js.map

@@ -18,7 +18,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Stem.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ type: "varchar", length: 200, nullable: false }),
+    typeorm_1.Column({ type: "text", nullable: false }),
     __metadata("design:type", String)
 ], Stem.prototype, "qStem", void 0);
 __decorate([
@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", String)
 ], Stem.prototype, "aStem", void 0);
 __decorate([
-    typeorm_1.Column({ type: "varchar", length: 200, nullable: true }),
+    typeorm_1.Column({ type: "text", nullable: true }),
     __metadata("design:type", String)
 ], Stem.prototype, "fbStem", void 0);
 __decorate([

@@ -12,13 +12,13 @@ export class Stem extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", length: 200, nullable: false })
+  @Column({ type: "text", nullable: false })
   qStem: string;
 
   @Column({ type: "varchar", length: 1, nullable: false })
   aStem: string;
 
-  @Column({ type: "varchar", length: 200, nullable: true })
+  @Column({ type: "text", nullable: true })
   fbStem?: string;
 
   @ManyToOne(

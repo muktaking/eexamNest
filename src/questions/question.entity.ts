@@ -38,7 +38,7 @@ export class Question extends BaseEntity {
   @Column({ type: "enum", enum: QType, nullable: false })
   qType: QType;
 
-  @Column()
+  @Column({ type: "text" })
   qText: string;
 
   @OneToMany(
@@ -49,7 +49,7 @@ export class Question extends BaseEntity {
   @JoinColumn({ name: "stems" })
   stems: Stem[];
 
-  @Column({ nullable: true })
+  @Column({ type: "text", nullable: true })
   generalFeedback: string;
 
   @Column({ nullable: true })
