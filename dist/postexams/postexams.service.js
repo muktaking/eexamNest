@@ -243,7 +243,9 @@ let PostexamsService = class PostexamsService {
                 ? 0
                 : -(this.penaltyMark * this.questionStemLength);
         this.totalScore += +mark.toFixed(2);
-        this.totalPenaltyMark += +(this.penaltyMark * this.questionStemLength).toFixed(2);
+        if (mark < 0) {
+            this.totalPenaltyMark += +(this.penaltyMark * this.questionStemLength).toFixed(2);
+        }
         return {
             stemResult: [question_model_1.QType.singleBestAnswer, +serverAns[0], +studentAns.stems[0]],
             mark,

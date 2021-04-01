@@ -343,6 +343,7 @@ export class PostexamsService {
     ).toFixed(2);
     this.totalScore += mark;
     this.totalPenaltyMark += +(this.penaltyMark * wrong).toFixed(2);
+
     return { stemResult: [QType.Matrix, ...stemValidatedArray], mark }; // [Qtype,answerStatus...]
   }
 
@@ -362,9 +363,11 @@ export class PostexamsService {
 
     this.totalScore += +mark.toFixed(2);
 
-    this.totalPenaltyMark += +(
-      this.penaltyMark * this.questionStemLength
-    ).toFixed(2);
+    if (mark < 0) {
+      this.totalPenaltyMark += +(
+        this.penaltyMark * this.questionStemLength
+      ).toFixed(2);
+    }
 
     return {
       stemResult: [QType.singleBestAnswer, +serverAns[0], +studentAns.stems[0]], // [Qtype,number,number]

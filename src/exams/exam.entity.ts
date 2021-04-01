@@ -66,7 +66,7 @@ export class Exam extends BaseEntity {
   @Column({ type: "float" })
   singleStemMark: number;
 
-  @Column({ default: 0 })
+  @Column({ type: "float", default: 0 })
   penaltyMark: number;
 
   @Column({ default: 40 })

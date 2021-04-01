@@ -80,7 +80,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Exam.prototype, "singleStemMark", void 0);
 __decorate([
-    typeorm_1.Column({ default: 0 }),
+    typeorm_1.Column({ type: "float", default: 0 }),
     __metadata("design:type", Number)
 ], Exam.prototype, "penaltyMark", void 0);
 __decorate([

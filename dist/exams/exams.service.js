@@ -286,7 +286,8 @@ let ExamsService = class ExamsService {
         exam.questions = questions;
         exam.singleQuestionMark = singleQuestionMark;
         exam.questionStemLength = questionStemLength;
-        (exam.penaltyMark = penaltyMark), (exam.timeLimit = timeLimit);
+        exam.penaltyMark = penaltyMark;
+        exam.timeLimit = timeLimit;
         exam.creatorId = +creator;
         exam.categoryIds = categoryType;
         exam.categoryType = [];
