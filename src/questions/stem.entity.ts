@@ -15,7 +15,7 @@ export class Stem extends BaseEntity {
   @Column({ type: "text", nullable: false })
   qStem: string;
 
-  @Column({ type: "varchar", length: 1, nullable: false })
+  @Column({ type: "varchar", length: 1, nullable: true })
   aStem: string;
 
   @Column({ type: "text", nullable: true })

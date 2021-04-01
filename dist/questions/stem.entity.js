@@ -22,7 +22,7 @@ __decorate([
     __metadata("design:type", String)
 ], Stem.prototype, "qStem", void 0);
 __decorate([
-    typeorm_1.Column({ type: "varchar", length: 1, nullable: false }),
+    typeorm_1.Column({ type: "varchar", length: 1, nullable: true }),
     __metadata("design:type", String)
 ], Stem.prototype, "aStem", void 0);
 __decorate([
