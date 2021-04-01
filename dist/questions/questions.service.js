@@ -190,7 +190,7 @@ let QuestionsService = class QuestionsService {
                 stem.qStem = element[i] !== "" ? element[i] : null;
                 stem.aStem = element[i + 5] !== "" ? element[i + 5] : null;
                 stem.fbStem = element[i + 10] !== "" ? element[i + 10] : null;
-                if (stem.qStem && stem.aStem)
+                if (stem.qStem)
                     stems.push(stem);
             }
             allData.push({

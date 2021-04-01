@@ -255,7 +255,7 @@ export class QuestionsService {
         stem.aStem = element[i + 5] !== "" ? element[i + 5] : null;
         stem.fbStem = element[i + 10] !== "" ? element[i + 10] : null;
         //console.log("----------------", stem);
-        if (stem.qStem && stem.aStem) stems.push(stem);
+        if (stem.qStem) stems.push(stem);
       }
 
       allData.push({
